@@ -1,0 +1,13 @@
+name: 'Setup GHDL'
+description: 'Easily install tip/nightly GHDL assets in GitHub Actions workflows'
+inputs:
+  backend:
+    description: 'Select GHDL backend (mcode, llvm or gcc)'
+    required: false
+    default: mcode
+runs:
+  using: 'node16'
+  main: 'index.js'
+branding:
+  color: gray-dark
+  icon: play
