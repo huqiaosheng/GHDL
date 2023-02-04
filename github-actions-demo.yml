@@ -1,13 +1,26 @@
-name: 'Setup GHDL'
-description: 'Easily install tip/nightly GHDL assets in GitHub Actions workflows'
-inputs:
-  backend:
-    description: 'Select GHDL backend (mcode, llvm or gcc)'
-    required: false
-    default: mcode
-runs:
-  using: 'node16'
-  main: 'index.js'
-branding:
-  color: gray-dark
-  icon: play
+uses: msys2/setup-msys2@v2
+  with:
+    msystem: MINGW64
+    update: true
+
+uses: ghdl/setup-ghdl-ci@nightly
+  with:
+    backend: llvm
+
+shell: msys2 {0}
+  run: |
+    ghdl --version
+
+    $GHDL --version
+
+shell: bash
+  run: |
+    $GHDL --version
+
+    "$MSYS2_PATH"MINGW64\\bin\\ghdl.exe --version
+
+shell: powershell
+  run: |
+    & "$env:GHDL" --version
+
+    & "$($env:MSYS2_PATH)MINGW64\bin\ghdl.exe" --version
